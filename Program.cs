@@ -25,7 +25,8 @@ void StartThread()
 {
     try
     {
-        var settings = File.ReadAllLines(settingFileName);
+        //var settings = File.ReadAllLines(settingFileName);
+        var settings = "1027 29270 2343 2252".Split(' ');
 Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
@@ -70,11 +71,11 @@ Console.WriteLine("File Readed : " + settings.Length);
 
 
 
-            if (lastSendEmailTime[firstCoin.ToString() + secondCoin.ToString()] > DateTime.Now.AddMinutes(delayForSendEmailMinute * -1))
+            if (lastSendEmailTime[firstCoin.ToString() + secondCoin.ToString()].AddMinutes(delayForSendEmailMinute) > DateTime.Now)
                 continue;
 
 
-            if (showLogTime[firstCoin.ToString() + secondCoin.ToString()] > DateTime.Now.AddMinutes(30 * -1))
+            if (showLogTime[firstCoin.ToString() + secondCoin.ToString()].AddMinutes(30) < DateTime.Now)
             {
                 Console.WriteLine("First Coin : " + (Currencies)firstCoin + "\n" +
                                                             "Second Coin : " + (Currencies)secondCoin + "\n" +
@@ -92,7 +93,7 @@ Console.WriteLine("File Readed : " + settings.Length);
             if (firstPrice / secondPrice < lowRange) SendMail("Low Range", "First Coin : " + (Currencies)firstCoin + "</br>" +
                                                                 "Second Coin : " + (Currencies)secondCoin + "</br>" +
                                                                 "Low Range : " + lowRange + "</br>" +
-                                                                "Current Range : " + (firstPrice / secondPrice)); ;
+                                                                "Current Range : " + (firstPrice / secondPrice));
         }
     }
     catch (Exception ex)
