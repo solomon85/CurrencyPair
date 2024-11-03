@@ -26,6 +26,7 @@ void StartThread()
     try
     {
         var settings = File.ReadAllLines(settingFileName);
+Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
             var firstCoin = Convert.ToInt32(settings[i + 0]);
