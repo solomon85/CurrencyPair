@@ -27,7 +27,7 @@ void StartThread()
     {
         //var settings = File.ReadAllLines(settingFileName);
         var settings = "1027 29270 2343 2252".Split(' ');
-        Console.WriteLine("File Readed : " + settings.Length);
+        //Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
             var firstCoin = Convert.ToInt32(settings[i + 0]);
@@ -73,11 +73,11 @@ void StartThread()
 
             if (showLogTime[firstCoin.ToString() + secondCoin.ToString()].AddMinutes(30) < DateTime.Now)
             {
-                Console.WriteLine("First Coin : " + (Currencies)firstCoin + "\n" +
-                                                            "Second Coin : " + (Currencies)secondCoin + "\n" +
-                                                            "Low Range : " + lowRange + "\n" +
-                                                            "High Range : " + highRange + "\n" +
-                                                            "Current Range : " + (firstPrice / secondPrice));
+                Console.WriteLine("First Coin : " + (Currencies)firstCoin + " " + firstPrice + "\n" +
+                                    "Second Coin : " + (Currencies)secondCoin + " " + secondPrice +  "\n" +
+                                    "Low Range : " + lowRange + "\n" +
+                                    "High Range : " + highRange + "\n" +
+                                    "Current Range : " + (firstPrice / secondPrice));
                 showLogTime[firstCoin.ToString() + secondCoin.ToString()] = DateTime.Now;
             }
 
@@ -87,12 +87,12 @@ void StartThread()
 
             lastSendEmailTime[firstCoin.ToString() + secondCoin.ToString()] = DateTime.Now;
 
-            if (firstPrice / secondPrice > highRange) SendMail("High Range", "First Coin : " + (Currencies)firstCoin + "</br>" +
-                                                            "Second Coin : " + (Currencies)secondCoin + "</br>" +
+            if (firstPrice / secondPrice > highRange) SendMail("High Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice + "</br>" +
+                                                            "Second Coin : " + (Currencies)secondCoin + " " + secondPrice + "</br>" +
                                                             "High Range : " + highRange + "</br>" +
                                                             "Current Range : " + (firstPrice / secondPrice));
-            if (firstPrice / secondPrice < lowRange) SendMail("Low Range", "First Coin : " + (Currencies)firstCoin + "</br>" +
-                                                                "Second Coin : " + (Currencies)secondCoin + "</br>" +
+            if (firstPrice / secondPrice < lowRange) SendMail("Low Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice + "</br>" +
+                                                                "Second Coin : " + (Currencies)secondCoin + " " + secondPrice + "</br>" +
                                                                 "Low Range : " + lowRange + "</br>" +
                                                                 "Current Range : " + (firstPrice / secondPrice));
         }
