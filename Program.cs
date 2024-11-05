@@ -26,7 +26,7 @@ void StartThread()
     try
     {
         //var settings = File.ReadAllLines(settingFileName);
-        var settings = "1027 29270 2252 2163".Split(' ');
+        var settings = "1027 29270 2000 2163".Split(' ');
         //Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
@@ -85,16 +85,17 @@ void StartThread()
                 continue;
 
 
-            lastSendEmailTime[firstCoin.ToString() + secondCoin.ToString()] = DateTime.Now;
 
-            if (firstPrice / secondPrice > highRange) SendMail("High Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice + "</br>" +
-                                                            "Second Coin : " + (Currencies)secondCoin + " " + secondPrice + "</br>" +
-                                                            "High Range : " + highRange + "</br>" +
-                                                            "Current Range : " + (firstPrice / secondPrice));
-            if (firstPrice / secondPrice < lowRange) SendMail("Low Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice + "</br>" +
-                                                                "Second Coin : " + (Currencies)secondCoin + " " + secondPrice + "</br>" +
-                                                                "Low Range : " + lowRange + "</br>" +
-                                                                "Current Range : " + (firstPrice / secondPrice));
+            if (firstPrice / secondPrice > highRange) SendMail("High Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice.ToString("#.0000") + "\n" +
+                                                            "Second Coin : " + (Currencies)secondCoin + " " + secondPrice.ToString("#.0000") + "\n" +
+                                                            "High Range : " + highRange + "\n" +
+                                                            "Current Range : " + (firstPrice / secondPrice),
+                                                                firstCoin.ToString(), secondCoin.ToString());
+            if (firstPrice / secondPrice < lowRange) SendMail("Low Range", "First Coin : " + (Currencies)firstCoin + " " + firstPrice.ToString("#.0000") + "\n" +
+                                                                "Second Coin : " + (Currencies)secondCoin + " " + secondPrice.ToString("#.0000") + "\n" +
+                                                                "Low Range : " + lowRange + "\n" +
+                                                                "Current Range : " + (firstPrice / secondPrice), 
+                                                                firstCoin.ToString(), secondCoin.ToString());
         }
     }
     catch (Exception ex)
@@ -120,10 +121,11 @@ object GetProducts(string url, int coinId)
     catch { return null; }
 
 }
-void SendMail(string mailSubject, string mailText)
+void SendMail(string mailSubject, string mailText, string firstCoin, string secondCoin)
 {
     string recipient = "reza.yy@gmail.com";
 
+    lastSendEmailTime[firstCoin + secondCoin] = DateTime.Now;
 
     Console.WriteLine("Email Send : " + mailSubject);
     using (MailMessage mail = new MailMessage())
@@ -131,8 +133,9 @@ void SendMail(string mailSubject, string mailText)
         mail.From = new MailAddress(recipient);
         mail.To.Add(recipient);
         mail.Subject = mailSubject;
-        mail.Body = "<h1>" + mailText + "</h1>";
-        mail.IsBodyHtml = true;
+        mail.Body =  mailText;
+        //mail.Body = "<p>" + mailText + "</p>";
+        //mail.IsBodyHtml = true;
         //mail.Attachments.Add(new Attachment("C:\\file.zip"));
 
         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
