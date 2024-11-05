@@ -127,7 +127,7 @@ void SendMail(string mailSubject, string mailText, string firstCoin, string seco
 
     lastSendEmailTime[firstCoin + secondCoin] = DateTime.Now;
 
-    Console.WriteLine("Email Send : " + mailSubject);
+    Console.WriteLine("------------------Email Send : " + mailSubject + "--------------------------");
     using (MailMessage mail = new MailMessage())
     {
         mail.From = new MailAddress(recipient);
