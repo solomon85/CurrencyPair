@@ -26,7 +26,7 @@ void StartThread()
     try
     {
         //var settings = File.ReadAllLines(settingFileName);
-        var settings = "1027 29270 2343 2252".Split(' ');
+        var settings = "1027 29270 2252 2163".Split(' ');
         //Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
