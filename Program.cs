@@ -100,6 +100,7 @@ void StartThread()
     }
     catch (Exception ex)
     {
+        Console.WriteLine(ex.ToString());
     }
 }
 object GetProducts(string url, int coinId)
