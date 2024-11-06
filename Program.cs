@@ -25,8 +25,8 @@ void StartThread()
 {
     try
     {
-        //var settings = File.ReadAllLines(settingFileName);
-        var settings = "1027 29270 2163 2078".Split(' ');
+        var settings = File.ReadAllLines(settingFileName);
+        //var settings = "1027 29270 2163 2078".Split(' ');
         //Console.WriteLine("File Readed : " + settings.Length);
         for (int i = 0; i < settings.Length; i += 4)
         {
@@ -73,11 +73,11 @@ void StartThread()
 
             if (showLogTime[firstCoin.ToString() + secondCoin.ToString()].AddMinutes(30) < DateTime.Now)
             {
-                Console.WriteLine("First Coin : " + (Currencies)firstCoin + " " + firstPrice + "\n" +
-                                    "Second Coin : " + (Currencies)secondCoin + " " + secondPrice +  "\n" +
-                                    "Low Range : " + lowRange + "\n" +
-                                    "High Range : " + highRange + "\n" +
-                                    "Current Range : " + (firstPrice / secondPrice));
+                Console.WriteLine((Currencies)firstCoin + ": " + firstPrice.ToString("#.0000") + "----" +
+                                    (Currencies)secondCoin + ": " + secondPrice.ToString("#.0000") +  "----" +
+                                    "High : " + highRange + "----" +
+                                    "Low : " + lowRange + "\n" +
+                                    "Current : " + (firstPrice / secondPrice).ToString("#.0000"));
                 showLogTime[firstCoin.ToString() + secondCoin.ToString()] = DateTime.Now;
             }
 
