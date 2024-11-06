@@ -73,9 +73,9 @@ void StartThread()
 
             if (showLogTime[firstCoin.ToString() + secondCoin.ToString()].AddMinutes(30) < DateTime.Now)
             {
-                Console.WriteLine((Currencies)firstCoin + ": " + firstPrice.ToString("#.0000") + "----" +
-                                    (Currencies)secondCoin + ": " + secondPrice.ToString("#.0000") +  "----" +
-                                    "High : " + highRange + "----" +
+                Console.WriteLine((Currencies)firstCoin + ": " + firstPrice.ToString("#.0000") + " ---- " +
+                                    (Currencies)secondCoin + ": " + secondPrice.ToString("#.0000") +  " ---- " +
+                                    "High : " + highRange + " ---- " +
                                     "Low : " + lowRange + "\n" +
                                     "Current : " + (firstPrice / secondPrice).ToString("#.0000"));
                 showLogTime[firstCoin.ToString() + secondCoin.ToString()] = DateTime.Now;
@@ -149,7 +149,7 @@ void SendMail(string mailSubject, string mailText, string firstCoin, string seco
 }
 public enum Currencies
 {
-    Bitcoin = 1,
-    Ethereum = 1027,
-    AeroDrome = 29270,
+    Btc = 1,
+    Eth = 1027,
+    Aero = 29270,
 }
