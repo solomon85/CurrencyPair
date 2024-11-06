@@ -14,7 +14,7 @@ int delayForSendEmailMinute = 360;
 Console.WriteLine("Service Start");
 
 
-string settingFileName = "Setting.txt";
+string settingFileName = "setting.txt";
 string _url = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart";
 while (true)
 {
